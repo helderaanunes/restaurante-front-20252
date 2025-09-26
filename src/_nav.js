@@ -13,6 +13,20 @@ import {
   cilPuzzle,
   cilSpeedometer,
   cilStar,
+  cilPlus,
+  cilList,
+  cilPizza,
+  cilBuilding,
+  cilUser,
+  cilShieldAlt,
+  cilLockUnlocked,
+  cilAddressBook,
+  cilTags,
+  cilFastfood,
+  cilLeaf,
+  cilTruck,
+  cilCalendar,
+  cilCart,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -47,6 +61,157 @@ const _nav = [
     component: CNavTitle,
     name: 'Components',
   },
+  {
+    component: CNavGroup,
+    name: 'Mesas',
+    to: '/mesas',
+    icon: <CIcon icon={cilPizza} customClassName="nav-icon" />, // use o ícone que preferir
+    items: [
+      {
+        component: CNavItem,
+        name: 'Listar',
+        to: '/mesas',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Adicionar',
+        to: '/mesas/new',
+        icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Restaurantes',
+    to: '/restaurantes',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    items: [
+      { component: CNavItem, name: 'Listar', to: '/restaurantes', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
+      { component: CNavItem, name: 'Adicionar', to: '/restaurantes/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Unidades',
+    to: '/unidades',
+    icon: <CIcon icon={cilBuilding} customClassName="nav-icon" />,
+    items: [
+      { component: CNavItem, name: 'Listar', to: '/unidades', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
+      { component: CNavItem, name: 'Adicionar', to: '/unidades/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Usuários',
+    to: '/usuarios',
+    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
+    items: [
+      { component: CNavItem, name: 'Listar', to: '/usuarios', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
+      { component: CNavItem, name: 'Adicionar', to: '/usuarios/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Perfis',
+    to: '/perfis',
+    icon: <CIcon icon={cilShieldAlt} customClassName="nav-icon" />,
+    items: [
+      { component: CNavItem, name: 'Listar', to: '/perfis', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
+      { component: CNavItem, name: 'Adicionar', to: '/perfis/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Permissões',
+    to: '/permissoes',
+    icon: <CIcon icon={cilLockUnlocked} customClassName="nav-icon" />,
+    items: [
+      { component: CNavItem, name: 'Listar', to: '/permissoes', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
+      { component: CNavItem, name: 'Adicionar', to: '/permissoes/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Clientes',
+    to: '/clientes',
+    icon: <CIcon icon={cilAddressBook} customClassName="nav-icon" />,
+    items: [
+      { component: CNavItem, name: 'Listar', to: '/clientes', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
+      { component: CNavItem, name: 'Adicionar', to: '/clientes/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Cardápios',
+    to: '/cardapios',
+    icon: <CIcon icon={cilPizza} customClassName="nav-icon" />,
+    items: [
+      { component: CNavItem, name: 'Listar', to: '/cardapios', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
+      { component: CNavItem, name: 'Adicionar', to: '/cardapios/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Categorias',
+    to: '/categorias',
+    icon: <CIcon icon={cilTags} customClassName="nav-icon" />,
+    items: [
+      { component: CNavItem, name: 'Listar', to: '/categorias', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
+      { component: CNavItem, name: 'Adicionar', to: '/categorias/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Itens do Cardápio',
+    to: '/itens-cardapio',
+    icon: <CIcon icon={cilFastfood} customClassName="nav-icon" />,
+    items: [
+      { component: CNavItem, name: 'Listar', to: '/itens-cardapio', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
+      { component: CNavItem, name: 'Adicionar', to: '/itens-cardapio/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Ingredientes',
+    to: '/ingredientes',
+    icon: <CIcon icon={cilLeaf} customClassName="nav-icon" />,
+    items: [
+      { component: CNavItem, name: 'Listar', to: '/ingredientes', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
+      { component: CNavItem, name: 'Adicionar', to: '/ingredientes/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Fornecedores',
+    to: '/fornecedores',
+    icon: <CIcon icon={cilTruck} customClassName="nav-icon" />,
+    items: [
+      { component: CNavItem, name: 'Listar', to: '/fornecedores', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
+      { component: CNavItem, name: 'Adicionar', to: '/fornecedores/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Reservas',
+    to: '/reservas',
+    icon: <CIcon icon={cilCalendar} customClassName="nav-icon" />,
+    items: [
+      { component: CNavItem, name: 'Listar', to: '/reservas', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
+      { component: CNavItem, name: 'Adicionar', to: '/reservas/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Compras',
+    to: '/compras',
+    icon: <CIcon icon={cilCart} customClassName="nav-icon" />,
+    items: [
+      { component: CNavItem, name: 'Listar', to: '/compras', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
+      { component: CNavItem, name: 'Adicionar', to: '/compras/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+    ],
+  },
+
   {
     component: CNavGroup,
     name: 'Base',

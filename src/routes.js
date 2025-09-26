@@ -51,8 +51,120 @@ const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
+// --- Mesas (já existentes no seu código de exemplo) ---
+const MesaList = React.lazy(() => import('./views/mesas/MesaList'))
+const MesaAdd = React.lazy(() => import('./views/mesas/MesaAdd'))
+
+// --- Restaurantes ---
+const RestauranteList = React.lazy(() => import('./views/restaurantes/RestauranteList'))
+const RestauranteAdd = React.lazy(() => import('./views/restaurantes/RestauranteAdd'))
+
+// --- Unidades ---
+const UnidadeList = React.lazy(() => import('./views/unidades/UnidadeList'))
+const UnidadeAdd = React.lazy(() => import('./views/unidades/UnidadeAdd'))
+
+// --- Usuários ---
+const UsuarioList = React.lazy(() => import('./views/usuarios/UsuarioList'))
+const UsuarioAdd = React.lazy(() => import('./views/usuarios/UsuarioAdd'))
+
+// --- Perfis ---
+const PerfilList = React.lazy(() => import('./views/perfis/PerfilList'))
+const PerfilAdd = React.lazy(() => import('./views/perfis/PerfilAdd'))
+
+// --- Permissões ---
+const PermissaoList = React.lazy(() => import('./views/permissoes/PermissaoList'))
+const PermissaoAdd = React.lazy(() => import('./views/permissoes/PermissaoAdd'))
+
+// --- Clientes ---
+const ClienteList = React.lazy(() => import('./views/clientes/ClienteList'))
+const ClienteAdd = React.lazy(() => import('./views/clientes/ClienteAdd'))
+
+// --- Cardápios ---
+const CardapioList = React.lazy(() => import('./views/cardapios/CardapioList'))
+const CardapioAdd = React.lazy(() => import('./views/cardapios/CardapioAdd'))
+
+// --- Categorias ---
+const CategoriaList = React.lazy(() => import('./views/categorias/CategoriaList'))
+const CategoriaAdd = React.lazy(() => import('./views/categorias/CategoriaAdd'))
+
+// --- Itens do Cardápio ---
+const ItemCardapioList = React.lazy(() => import('./views/itens-cardapio/ItemCardapioList'))
+const ItemCardapioAdd = React.lazy(() => import('./views/itens-cardapio/ItemCardapioAdd'))
+
+// --- Ingredientes ---
+const IngredienteList = React.lazy(() => import('./views/ingredientes/IngredienteList'))
+const IngredienteAdd = React.lazy(() => import('./views/ingredientes/IngredienteAdd'))
+
+// --- Fornecedores ---
+const FornecedorList = React.lazy(() => import('./views/fornecedores/FornecedorList'))
+const FornecedorAdd = React.lazy(() => import('./views/fornecedores/FornecedorAdd'))
+
+// --- Reservas ---
+const ReservaList = React.lazy(() => import('./views/reservas/ReservaList'))
+const ReservaAdd = React.lazy(() => import('./views/reservas/ReservaAdd'))
+
+// --- Compras ---
+const CompraList = React.lazy(() => import('./views/compras/CompraList'))
+const CompraAdd = React.lazy(() => import('./views/compras/CompraAdd'))
+
 const routes = [
   { path: '/', exact: true, name: 'Home' },
+  // Mesas
+  { path: '/mesas', name: 'Mesas', element: MesaList, exact: true },
+  { path: '/mesas/new', name: 'Adicionar Mesa', element: MesaAdd },
+
+  // Restaurantes
+  { path: '/restaurantes', name: 'Restaurantes', element: RestauranteList, exact: true },
+  { path: '/restaurantes/new', name: 'Adicionar Restaurante', element: RestauranteAdd },
+
+  // Unidades
+  { path: '/unidades', name: 'Unidades', element: UnidadeList, exact: true },
+  { path: '/unidades/new', name: 'Adicionar Unidade', element: UnidadeAdd },
+
+  // Usuários
+  { path: '/usuarios', name: 'Usuários', element: UsuarioList, exact: true },
+  { path: '/usuarios/new', name: 'Adicionar Usuário', element: UsuarioAdd },
+
+  // Perfis
+  { path: '/perfis', name: 'Perfis', element: PerfilList, exact: true },
+  { path: '/perfis/new', name: 'Adicionar Perfil', element: PerfilAdd },
+
+  // Permissões
+  { path: '/permissoes', name: 'Permissões', element: PermissaoList, exact: true },
+  { path: '/permissoes/new', name: 'Adicionar Permissão', element: PermissaoAdd },
+
+  // Clientes
+  { path: '/clientes', name: 'Clientes', element: ClienteList, exact: true },
+  { path: '/clientes/new', name: 'Adicionar Cliente', element: ClienteAdd },
+
+  // Cardápios
+  { path: '/cardapios', name: 'Cardápios', element: CardapioList, exact: true },
+  { path: '/cardapios/new', name: 'Adicionar Cardápio', element: CardapioAdd },
+
+  // Categorias
+  { path: '/categorias', name: 'Categorias', element: CategoriaList, exact: true },
+  { path: '/categorias/new', name: 'Adicionar Categoria', element: CategoriaAdd },
+
+  // Itens do Cardápio
+  { path: '/itens-cardapio', name: 'Itens do Cardápio', element: ItemCardapioList, exact: true },
+  { path: '/itens-cardapio/new', name: 'Adicionar Item do Cardápio', element: ItemCardapioAdd },
+
+  // Ingredientes
+  { path: '/ingredientes', name: 'Ingredientes', element: IngredienteList, exact: true },
+  { path: '/ingredientes/new', name: 'Adicionar Ingrediente', element: IngredienteAdd },
+
+  // Fornecedores
+  { path: '/fornecedores', name: 'Fornecedores', element: FornecedorList, exact: true },
+  { path: '/fornecedores/new', name: 'Adicionar Fornecedor', element: FornecedorAdd },
+
+  // Reservas
+  { path: '/reservas', name: 'Reservas', element: ReservaList, exact: true },
+  { path: '/reservas/new', name: 'Adicionar Reserva', element: ReservaAdd },
+
+  // Compras
+  { path: '/compras', name: 'Compras', element: CompraList, exact: true },
+  { path: '/compras/new', name: 'Adicionar Compra', element: CompraAdd },
+
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
