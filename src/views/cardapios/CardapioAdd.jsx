@@ -27,7 +27,8 @@ const CardapioForm = ({ cardapioId, onSuccess }) => {
   // Carregar cardapio para edição (se tiver id)
   useEffect(() => {
     if (cardapioId) {
-      axios.get(`http://localhost:8080/cardapio/${cardapioId}`)
+      axios
+        .get(`http://localhost:8080/cardapio/${cardapioId}`)
         .then((response) => {
           // converter datas para input yyyy-MM-dd
           const data = response.data
