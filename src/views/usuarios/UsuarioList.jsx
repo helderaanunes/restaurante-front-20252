@@ -69,15 +69,9 @@ const UsuarioList = () => {
                     <CTableDataCell>{usuario.id}</CTableDataCell>
                     <CTableDataCell>{usuario.nome}</CTableDataCell>
                     <CTableDataCell>{usuario.email}</CTableDataCell>
+                    <CTableDataCell>{usuario.ativo ? 'Sim' : 'Não'}</CTableDataCell>
                     <CTableDataCell>
-                      {usuario.ativo ? 'Sim' : 'Não'}
-                    </CTableDataCell>
-                    <CTableDataCell>
-                      <CButton
-                        color="danger"
-                        size="sm"
-                        onClick={() => handleDelete(usuario.id)}
-                      >
+                      <CButton color="danger" size="sm" onClick={() => handleDelete(usuario.id)}>
                         Excluir
                       </CButton>
                     </CTableDataCell>
