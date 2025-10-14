@@ -98,6 +98,7 @@ const IngredienteAdd = React.lazy(() => import('./views/ingredientes/Ingrediente
 // --- Fornecedores ---
 const FornecedorList = React.lazy(() => import('./views/fornecedores/FornecedorList'))
 const FornecedorAdd = React.lazy(() => import('./views/fornecedores/FornecedorAdd'))
+const FornecedorEdit = React.lazy(() => import('./views/fornecedores/FornecedorEdit'))
 
 // --- Reservas ---
 const ReservaList = React.lazy(() => import('./views/reservas/ReservaList'))
@@ -156,6 +157,7 @@ const routes = [
   // Fornecedores
   { path: '/fornecedores', name: 'Fornecedores', element: FornecedorList, exact: true },
   { path: '/fornecedores/new', name: 'Adicionar Fornecedor', element: FornecedorAdd },
+  { path: '/fornecedores/editar/:id', name: 'Editar Fornecedor', element: FornecedorEdit },
 
   // Reservas
   { path: '/reservas', name: 'Reservas', element: ReservaList, exact: true },
