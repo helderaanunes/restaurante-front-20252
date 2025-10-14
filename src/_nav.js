@@ -87,8 +87,18 @@ const _nav = [
     to: '/restaurantes',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
     items: [
-      { component: CNavItem, name: 'Listar', to: '/restaurantes', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
-      { component: CNavItem, name: 'Adicionar', to: '/restaurantes/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+      {
+        component: CNavItem,
+        name: 'Listar',
+        to: '/restaurantes',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Adicionar',
+        to: '/restaurantes/new',
+        icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+      },
     ],
   },
   {
@@ -97,8 +107,18 @@ const _nav = [
     to: '/unidades',
     icon: <CIcon icon={cilBuilding} customClassName="nav-icon" />,
     items: [
-      { component: CNavItem, name: 'Listar', to: '/unidades', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
-      { component: CNavItem, name: 'Adicionar', to: '/unidades/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+      {
+        component: CNavItem,
+        name: 'Listar',
+        to: '/unidades',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Adicionar',
+        to: '/unidades/new',
+        icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+      },
     ],
   },
   {
@@ -107,8 +127,18 @@ const _nav = [
     to: '/usuarios',
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
     items: [
-      { component: CNavItem, name: 'Listar', to: '/usuarios', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
-      { component: CNavItem, name: 'Adicionar', to: '/usuarios/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+      {
+        component: CNavItem,
+        name: 'Listar',
+        to: '/usuarios',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Adicionar',
+        to: '/usuarios/new',
+        icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+      },
     ],
   },
   {
@@ -117,8 +147,18 @@ const _nav = [
     to: '/perfis',
     icon: <CIcon icon={cilShieldAlt} customClassName="nav-icon" />,
     items: [
-      { component: CNavItem, name: 'Listar', to: '/perfis', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
-      { component: CNavItem, name: 'Adicionar', to: '/perfis/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+      {
+        component: CNavItem,
+        name: 'Listar',
+        to: '/perfis',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Adicionar',
+        to: '/perfis/new',
+        icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+      },
     ],
   },
   {
@@ -127,8 +167,18 @@ const _nav = [
     to: '/permissoes',
     icon: <CIcon icon={cilLockUnlocked} customClassName="nav-icon" />,
     items: [
-      { component: CNavItem, name: 'Listar', to: '/permissoes', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
-      { component: CNavItem, name: 'Adicionar', to: '/permissoes/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+      {
+        component: CNavItem,
+        name: 'Listar',
+        to: '/permissoes',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Adicionar',
+        to: '/permissoes/new',
+        icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+      },
     ],
   },
   {
@@ -137,8 +187,18 @@ const _nav = [
     to: '/clientes',
     icon: <CIcon icon={cilAddressBook} customClassName="nav-icon" />,
     items: [
-      { component: CNavItem, name: 'Listar', to: '/clientes', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
-      { component: CNavItem, name: 'Adicionar', to: '/clientes/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+      {
+        component: CNavItem,
+        name: 'Listar',
+        to: '/clientes',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Adicionar',
+        to: '/clientes/new',
+        icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+      },
     ],
   },
   {
@@ -147,8 +207,18 @@ const _nav = [
     to: '/cardapios',
     icon: <CIcon icon={cilPizza} customClassName="nav-icon" />,
     items: [
-      { component: CNavItem, name: 'Listar', to: '/cardapios', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
-      { component: CNavItem, name: 'Adicionar', to: '/cardapios/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+      {
+        component: CNavItem,
+        name: 'Listar',
+        to: '/cardapios',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Adicionar',
+        to: '/cardapios/new',
+        icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+      },
     ],
   },
   {
@@ -157,8 +227,18 @@ const _nav = [
     to: '/categorias',
     icon: <CIcon icon={cilTags} customClassName="nav-icon" />,
     items: [
-      { component: CNavItem, name: 'Listar', to: '/categorias', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
-      { component: CNavItem, name: 'Adicionar', to: '/categorias/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+      {
+        component: CNavItem,
+        name: 'Listar',
+        to: '/categorias',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Adicionar',
+        to: '/categorias/new',
+        icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+      },
     ],
   },
   {
@@ -167,8 +247,18 @@ const _nav = [
     to: '/itens-cardapio',
     icon: <CIcon icon={cilFastfood} customClassName="nav-icon" />,
     items: [
-      { component: CNavItem, name: 'Listar', to: '/itens-cardapio', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
-      { component: CNavItem, name: 'Adicionar', to: '/itens-cardapio/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+      {
+        component: CNavItem,
+        name: 'Listar',
+        to: '/itens-cardapio',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Adicionar',
+        to: '/itens-cardapio/new',
+        icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+      },
     ],
   },
   {
@@ -177,8 +267,18 @@ const _nav = [
     to: '/ingredientes',
     icon: <CIcon icon={cilLeaf} customClassName="nav-icon" />,
     items: [
-      { component: CNavItem, name: 'Listar', to: '/ingredientes', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
-      { component: CNavItem, name: 'Adicionar', to: '/ingredientes/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+      {
+        component: CNavItem,
+        name: 'Listar',
+        to: '/ingredientes',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Adicionar',
+        to: '/ingredientes/new',
+        icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+      },
     ],
   },
   {
@@ -187,8 +287,18 @@ const _nav = [
     to: '/fornecedores',
     icon: <CIcon icon={cilTruck} customClassName="nav-icon" />,
     items: [
-      { component: CNavItem, name: 'Listar', to: '/fornecedores', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
-      { component: CNavItem, name: 'Adicionar', to: '/fornecedores/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+      {
+        component: CNavItem,
+        name: 'Listar',
+        to: '/fornecedores',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Adicionar',
+        to: '/fornecedores/new',
+        icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+      },
     ],
   },
   {
@@ -197,8 +307,18 @@ const _nav = [
     to: '/reservas',
     icon: <CIcon icon={cilCalendar} customClassName="nav-icon" />,
     items: [
-      { component: CNavItem, name: 'Listar', to: '/reservas', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
-      { component: CNavItem, name: 'Adicionar', to: '/reservas/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+      {
+        component: CNavItem,
+        name: 'Listar',
+        to: '/reservas',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Adicionar',
+        to: '/reservas/new',
+        icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+      },
     ],
   },
   {
@@ -207,8 +327,18 @@ const _nav = [
     to: '/compras',
     icon: <CIcon icon={cilCart} customClassName="nav-icon" />,
     items: [
-      { component: CNavItem, name: 'Listar', to: '/compras', icon: <CIcon icon={cilList} customClassName="nav-icon" /> },
-      { component: CNavItem, name: 'Adicionar', to: '/compras/new', icon: <CIcon icon={cilPlus} customClassName="nav-icon" /> },
+      {
+        component: CNavItem,
+        name: 'Listar',
+        to: '/compras',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name: 'Adicionar',
+        to: '/compras/new',
+        icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+      },
     ],
   },
 
