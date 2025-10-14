@@ -16,21 +16,38 @@ const CategoriaForm = () => {
   const [nome, setNome] = useState('')
   const [ordem, setOrdem] = useState('')
   const [mensagem, setMensagem] = useState('')
+  const [erro, setErro] = useState(false) // para diferenciar mensagem de erro/sucesso
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setMensagem('')
+    setErro(false)
+
+    // Validação simples no frontend (opcional)
+    if (!nome.trim()) {
+      setMensagem('O nome da categoria é obrigatório.')
+      setErro(true)
+      return
+    }
+    if (!ordem || isNaN(ordem)) {
+      setMensagem('Informe uma ordem válida.')
+      setErro(true)
+      return
+    }
 
     try {
       const response = await axios.post('http://localhost:8080/categoriaItem', {
-        nome,
-        ordem: parseInt(ordem),
+        nome: nome.trim(),
+        ordem: parseInt(ordem, 10),
       })
       setMensagem(`Categoria "${response.data.nome}" cadastrada com sucesso!`)
+      setErro(false)
       setNome('')
       setOrdem('')
     } catch (error) {
-      setMensagem('Erro ao cadastrar categoria. Verifique os dados e tente novamente.')
       console.error(error)
+      setMensagem('Erro ao cadastrar categoria. Verifique os dados e tente novamente.')
+      setErro(true)
     }
   }
 
@@ -68,7 +85,9 @@ const CategoriaForm = () => {
               <CButton type="submit" color="primary">
                 Cadastrar Categoria
               </CButton>
-              {mensagem && <p className="mt-3 text-success">{mensagem}</p>}
+              {mensagem && (
+                <p className={`mt-3 ${erro ? 'text-danger' : 'text-success'}`}>{mensagem}</p>
+              )}
             </CForm>
           </CCardBody>
         </CCard>
