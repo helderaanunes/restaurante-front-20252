@@ -10,28 +10,35 @@ import {
   CFormInput,
   CFormLabel,
   CRow,
+  CModal,
+  CModalBody,
+  CModalFooter,
+  CModalHeader,
 } from '@coreui/react'
 
 const CategoriaForm = () => {
   const [nome, setNome] = useState('')
   const [ordem, setOrdem] = useState('')
   const [mensagem, setMensagem] = useState('')
-  const [erro, setErro] = useState(false) // para diferenciar mensagem de erro/sucesso
+  const [erro, setErro] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setMensagem('')
     setErro(false)
 
-    // Validação simples no frontend (opcional)
+
     if (!nome.trim()) {
       setMensagem('O nome da categoria é obrigatório.')
       setErro(true)
+      setModalVisible(true)
       return
     }
-    if (!ordem || isNaN(ordem)) {
-      setMensagem('Informe uma ordem válida.')
+    if (!ordem || isNaN(ordem) || ordem < 1) {
+      setMensagem('Informe uma ordem válida (não pode ser negativa).')
       setErro(true)
+      setModalVisible(true)
       return
     }
 
@@ -44,10 +51,12 @@ const CategoriaForm = () => {
       setErro(false)
       setNome('')
       setOrdem('')
+      setModalVisible(true)
     } catch (error) {
       console.error(error)
       setMensagem('Erro ao cadastrar categoria. Verifique os dados e tente novamente.')
       setErro(true)
+      setModalVisible(true)
     }
   }
 
@@ -82,16 +91,25 @@ const CategoriaForm = () => {
                   required
                 />
               </div>
-              <CButton type="submit" color="primary">
+              <CButton type="submit" color="success">
                 Cadastrar Categoria
               </CButton>
-              {mensagem && (
-                <p className={`mt-3 ${erro ? 'text-danger' : 'text-success'}`}>{mensagem}</p>
-              )}
             </CForm>
           </CCardBody>
         </CCard>
       </CCol>
+
+      <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
+        <CModalHeader closeButton>
+          <strong>{erro ? 'Erro' : 'Sucesso'}</strong>
+        </CModalHeader>
+        <CModalBody>{mensagem}</CModalBody>
+        <CModalFooter>
+          <CButton color="secondary" onClick={() => setModalVisible(false)}>
+            Fechar
+          </CButton>
+        </CModalFooter>
+      </CModal>
     </CRow>
   )
 }
