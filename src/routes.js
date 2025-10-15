@@ -119,6 +119,7 @@ const routes = [
 
   // Unidades
   { path: '/unidades', name: 'Unidades', element: UnidadeList, exact: true },
+  { path: '/unidades/new/:id', name: 'Editar Unidade', element: UnidadeAdd },
   { path: '/unidades/new', name: 'Adicionar Unidade', element: UnidadeAdd },
 
   // Usuários
