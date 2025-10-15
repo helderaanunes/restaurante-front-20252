@@ -34,12 +34,20 @@ const UnidadeList = () => {
 
   // Função para excluir a unidade
   const excluirUnidade = async (id) => {
+    // Exibe uma confirmação antes de excluir
+    const confirmacao = window.confirm('Tem certeza que deseja excluir esta unidade?')
+    if (!confirmacao) return
     try {
       await axios.delete(`http://localhost:8080/unidade/${id}`)
       setUnidades(unidades.filter((unidade) => unidade.id !== id))
     } catch (error) {
       console.error('Erro ao excluir unidade:', error)
     }
+  }
+
+  // Editar unidade
+  const editarUnidade = async (id) => {
+    navigate(`/unidades/new/${id}`)
   }
 
   return (
@@ -67,6 +75,9 @@ const UnidadeList = () => {
                       <CTableDataCell>
                         <CButton color="danger" onClick={() => excluirUnidade(unidade.id)}>
                           Excluir
+                        </CButton>
+                        <CButton color="success" onClick={() => editarUnidade(unidade.id)}>
+                          Editar
                         </CButton>
                       </CTableDataCell>
                     </CTableRow>

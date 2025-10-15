@@ -110,6 +110,7 @@ const FornecedorList = () => {
                     <CTableHeaderCell>CNPJ</CTableHeaderCell>
                     <CTableHeaderCell>Email</CTableHeaderCell>
                     <CTableHeaderCell>Telefone</CTableHeaderCell>
+                    <CTableHeaderCell>Ações</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
@@ -124,8 +125,7 @@ const FornecedorList = () => {
                         <CButton
                           color="warning"
                           size="sm"
-                          className="me-2"
-                          onClick={() => navigate(`/fornecedores/edit/${f.id}`)}
+                          onClick={() => navigate(`/fornecedores/editar/${f.id}`)}
                         >
                           Editar
                         </CButton>

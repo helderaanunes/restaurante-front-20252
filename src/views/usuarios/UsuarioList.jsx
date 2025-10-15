@@ -69,15 +69,17 @@ const UsuarioList = () => {
                     <CTableDataCell>{usuario.id}</CTableDataCell>
                     <CTableDataCell>{usuario.nome}</CTableDataCell>
                     <CTableDataCell>{usuario.email}</CTableDataCell>
-                    <CTableDataCell>
-                      {usuario.ativo ? 'Sim' : 'Não'}
-                    </CTableDataCell>
+                    <CTableDataCell>{usuario.ativo ? 'Sim' : 'Não'}</CTableDataCell>
                     <CTableDataCell>
                       <CButton
-                        color="danger"
+                        color="warning"
                         size="sm"
-                        onClick={() => handleDelete(usuario.id)}
+                        className="me-2"
+                        onClick={() => (window.location.href = `/editar-usuario/${usuario.id}`)}
                       >
+                        Editar
+                      </CButton>
+                      <CButton color="danger" size="sm" onClick={() => handleDelete(usuario.id)}>
                         Excluir
                       </CButton>
                     </CTableDataCell>
