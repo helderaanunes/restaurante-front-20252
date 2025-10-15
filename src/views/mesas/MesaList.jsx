@@ -75,7 +75,7 @@ const MesaList = () => {
   const goToPage = (p) => setPage(Math.min(Math.max(1, p), totalPages))
 
   // --- Ações ---
-  const handleAdd = () => navigate('/mesas/novo')
+  const handleAdd = () => navigate('/mesas/new')
   const handleEdit = (id) => navigate(`/mesas/editar/${id}`)
 
   const handleDelete = async (id) => {
