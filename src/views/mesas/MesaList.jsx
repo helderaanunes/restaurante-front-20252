@@ -39,7 +39,6 @@ const MesaList = () => {
       setLoading(true)
       setError('')
       const { data } = await axios.get('http://localhost:8080/mesa')
-      // Garantir que é array
       setMesas(Array.isArray(data) ? data : [])
     } catch (err) {
       const msg = err?.response?.data?.message || err?.message || 'Erro ao carregar as mesas.'
@@ -86,7 +85,12 @@ const MesaList = () => {
     try {
       setDeletingId(id)
       await axios.delete(`http://localhost:8080/mesa/${id}`)
+      // remove localmente sem recarregar
       setMesas((prev) => prev.filter((m) => m.id !== id))
+      // ajustar página se necessário
+      if (filtered.length - 1 <= pageStart && currentPage > 1) {
+        goToPage(currentPage - 1)
+      }
     } catch (err) {
       const msg = err?.response?.data?.message || err?.message || 'Erro ao remover a mesa.'
       setError(msg)
@@ -158,7 +162,12 @@ const MesaList = () => {
                           <CTableDataCell>{m.qrFixo || '—'}</CTableDataCell>
                           <CTableDataCell className="text-end">
                             <div className="d-inline-flex gap-2">
-                              <CButton size="sm" color="info" className="text-white" onClick={() => handleEdit(m.id)}>
+                              <CButton
+                                size="sm"
+                                color="info"
+                                className="text-white"
+                                onClick={() => handleEdit(m.id)}
+                              >
                                 <CIcon icon={cilPencil} className="me-1" /> Editar
                               </CButton>
                               <CButton
@@ -192,16 +201,40 @@ const MesaList = () => {
                     {filtered.length} registro(s) • Página {currentPage} de {totalPages}
                   </small>
                   <div className="d-flex gap-2">
-                    <CButton color="secondary" variant="outline" size="sm" onClick={() => goToPage(1)} disabled={currentPage === 1}>
+                    <CButton
+                      color="secondary"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => goToPage(1)}
+                      disabled={currentPage === 1}
+                    >
                       « Primeiro
                     </CButton>
-                    <CButton color="secondary" variant="outline" size="sm" onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1}>
+                    <CButton
+                      color="secondary"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => goToPage(currentPage - 1)}
+                      disabled={currentPage === 1}
+                    >
                       ‹ Anterior
                     </CButton>
-                    <CButton color="secondary" variant="outline" size="sm" onClick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages}>
+                    <CButton
+                      color="secondary"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => goToPage(currentPage + 1)}
+                      disabled={currentPage === totalPages}
+                    >
                       Próxima ›
                     </CButton>
-                    <CButton color="secondary" variant="outline" size="sm" onClick={() => goToPage(totalPages)} disabled={currentPage === totalPages}>
+                    <CButton
+                      color="secondary"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => goToPage(totalPages)}
+                      disabled={currentPage === totalPages}
+                    >
                       Última »
                     </CButton>
                   </div>
