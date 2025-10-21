@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   CButton,
   CCard,
@@ -13,19 +13,41 @@ import {
   CSpinner,
 } from '@coreui/react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
-const MesaAdd = () => {
+const MesaEdit = () => {
   const navigate = useNavigate()
+  const { id } = useParams()
 
   const [form, setForm] = useState({
     numero: '',
     capacidade: '',
     qrFixo: '',
   })
+  const [loading, setLoading] = useState(true)
   const [salvando, setSalvando] = useState(false)
   const [erro, setErro] = useState('')
   const [ok, setOk] = useState('')
+
+  useEffect(() => {
+    const carregar = async () => {
+      try {
+        setLoading(true)
+        const { data } = await axios.get(`http://localhost:8080/mesa/${id}`)
+        // adapta caso backend retorne objeto com campos diferentes
+        setForm({
+          numero: String(data.numero ?? ''),
+          capacidade: String(data.capacidade ?? ''),
+          qrFixo: data.qrFixo ?? '',
+        })
+      } catch (err) {
+        setErro('Erro ao carregar a mesa.')
+      } finally {
+        setLoading(false)
+      }
+    }
+    carregar()
+  }, [id])
 
   const onChange = (e) => {
     const { name, value } = e.target
@@ -41,10 +63,6 @@ const MesaAdd = () => {
   const validar = () => {
     if (!form.numero) return 'Informe o número da mesa.'
     if (!form.capacidade) return 'Informe a capacidade.'
-    const n = parseInt(form.numero, 10)
-    const c = parseInt(form.capacidade, 10)
-    if (Number.isNaN(n) || n <= 0) return 'Número da mesa inválido.'
-    if (Number.isNaN(c) || c <= 0) return 'Capacidade inválida.'
     return ''
   }
 
@@ -52,7 +70,6 @@ const MesaAdd = () => {
     e.preventDefault()
     setErro('')
     setOk('')
-
     const msg = validar()
     if (msg) {
       setErro(msg)
@@ -67,44 +84,42 @@ const MesaAdd = () => {
 
     try {
       setSalvando(true)
-      const resp = await axios.post('http://localhost:8080/mesa', payload, {
+      await axios.put(`http://localhost:8080/mesa/${id}`, payload, {
         headers: { 'Content-Type': 'application/json' },
       })
-      setOk('Mesa cadastrada com sucesso.')
-      // se quiser navegar pra lista:
-      setTimeout(() => navigate('/mesas'), 400)
+      setOk('Mesa atualizada com sucesso.')
+      setTimeout(() => navigate('/mesas'), 500)
     } catch (err) {
       const detail =
         err?.response?.data?.message ||
         err?.response?.data?.error ||
         err?.message ||
-        'Erro ao salvar a mesa.'
+        'Erro ao atualizar a mesa.'
       setErro(detail)
     } finally {
       setSalvando(false)
     }
   }
 
-  const onCancel = () => navigate('/mesas')
+  if (loading) {
+    return (
+      <div className="text-center py-4">
+        <CSpinner color="primary" />
+        <p>Carregando...</p>
+      </div>
+    )
+  }
 
   return (
     <CRow>
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Cadastrar Mesa</strong>
+            <strong>Editar Mesa</strong>
           </CCardHeader>
           <CCardBody>
-            {erro && (
-              <CAlert color="danger" className="mb-3">
-                {erro}
-              </CAlert>
-            )}
-            {ok && (
-              <CAlert color="success" className="mb-3">
-                {ok}
-              </CAlert>
-            )}
+            {erro && <CAlert color="danger">{erro}</CAlert>}
+            {ok && <CAlert color="success">{ok}</CAlert>}
 
             <CForm onSubmit={onSubmit}>
               <div className="mb-3">
@@ -112,8 +127,6 @@ const MesaAdd = () => {
                 <CFormInput
                   id="numero"
                   name="numero"
-                  type="text"
-                  placeholder="Ex.: 10"
                   value={form.numero}
                   onChange={onChange}
                   required
@@ -125,8 +138,6 @@ const MesaAdd = () => {
                 <CFormInput
                   id="capacidade"
                   name="capacidade"
-                  type="text"
-                  placeholder="Ex.: 4"
                   value={form.capacidade}
                   onChange={onChange}
                   required
@@ -135,14 +146,7 @@ const MesaAdd = () => {
 
               <div className="mb-3">
                 <CFormLabel htmlFor="qrFixo">QR Fixo (opcional)</CFormLabel>
-                <CFormInput
-                  id="qrFixo"
-                  name="qrFixo"
-                  type="text"
-                  placeholder="Ex.: MESA-10-QR"
-                  value={form.qrFixo}
-                  onChange={onChange}
-                />
+                <CFormInput id="qrFixo" name="qrFixo" value={form.qrFixo} onChange={onChange} />
               </div>
 
               <div className="d-flex gap-2">
@@ -156,7 +160,12 @@ const MesaAdd = () => {
                     'Salvar'
                   )}
                 </CButton>
-                <CButton color="secondary" type="button" variant="outline" onClick={onCancel}>
+                <CButton
+                  color="secondary"
+                  type="button"
+                  variant="outline"
+                  onClick={() => navigate('/mesas')}
+                >
                   Cancelar
                 </CButton>
               </div>
@@ -168,4 +177,4 @@ const MesaAdd = () => {
   )
 }
 
-export default MesaAdd
+export default MesaEdit
