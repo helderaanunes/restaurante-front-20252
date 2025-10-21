@@ -28,32 +28,36 @@ const CategoriaForm = () => {
     setMensagem('')
     setErro(false)
 
-
+    // Validações
     if (!nome.trim()) {
       setMensagem('O nome da categoria é obrigatório.')
       setErro(true)
       setModalVisible(true)
       return
     }
-    if (!ordem || isNaN(ordem) || ordem < 1) {
-      setMensagem('Informe uma ordem válida (não pode ser negativa).')
+
+    const ordemNumerica = parseInt(ordem, 10)
+    if (!ordem || isNaN(ordemNumerica) || ordemNumerica <= 0) {
+      setMensagem('Informe uma ordem válida (maior que zero).')
       setErro(true)
       setModalVisible(true)
       return
     }
 
+    // Envio para API (usando proxy)
     try {
-      const response = await axios.post('http://localhost:8080/categoriaItem', {
+      const response = await axios.post('/categoriaItem', {
         nome: nome.trim(),
-        ordem: parseInt(ordem, 10),
+        ordem: ordemNumerica,
       })
+
       setMensagem(`Categoria "${response.data.nome}" cadastrada com sucesso!`)
       setErro(false)
       setNome('')
       setOrdem('')
       setModalVisible(true)
     } catch (error) {
-      console.error(error)
+      console.error('Erro ao cadastrar categoria:', error)
       setMensagem('Erro ao cadastrar categoria. Verifique os dados e tente novamente.')
       setErro(true)
       setModalVisible(true)
@@ -100,7 +104,10 @@ const CategoriaForm = () => {
       </CCol>
 
       <CModal visible={modalVisible} onClose={() => setModalVisible(false)}>
-        <CModalHeader closeButton>
+        <CModalHeader
+          closeButton
+          className={erro ? 'bg-danger text-white' : 'bg-success text-white'}
+        >
           <strong>{erro ? 'Erro' : 'Sucesso'}</strong>
         </CModalHeader>
         <CModalBody>{mensagem}</CModalBody>
