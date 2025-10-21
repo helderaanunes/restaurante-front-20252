@@ -66,6 +66,7 @@ const UnidadeAdd = React.lazy(() => import('./views/unidades/UnidadeAdd'))
 // --- Usuários ---
 const UsuarioList = React.lazy(() => import('./views/usuarios/UsuarioList'))
 const UsuarioAdd = React.lazy(() => import('./views/usuarios/UsuarioAdd'))
+const UsuarioEdit = React.lazy(() => import('./views/usuarios/UsuarioEdit'))
 
 // --- Perfis ---
 const PerfilList = React.lazy(() => import('./views/perfis/PerfilList'))
@@ -124,7 +125,7 @@ const routes = [
   // Usuários
   { path: '/usuarios', name: 'Usuários', element: UsuarioList, exact: true },
   { path: '/usuarios/new', name: 'Adicionar Usuário', element: UsuarioAdd },
-
+  { path: '/usuarios/editar/:id', name: 'Editar Usuário', element: UsuarioEdit },
   // Perfis
   { path: '/perfis', name: 'Perfis', element: PerfilList, exact: true },
   { path: '/perfis/new', name: 'Adicionar Perfil', element: PerfilAdd },
