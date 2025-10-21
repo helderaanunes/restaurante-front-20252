@@ -1,36 +1,27 @@
+// UsuarioList.jsx
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CRow,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
+  CButton, CCard, CCardBody, CCardHeader, CCol, CRow,
+  CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow
 } from '@coreui/react'
 
 const UsuarioList = () => {
   const [usuarios, setUsuarios] = useState([])
+  const navigate = useNavigate()
 
   const carregarUsuarios = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/usuario')
-      setUsuarios(response.data)
+      const { data } = await axios.get('http://localhost:8080/usuario')
+      setUsuarios(data)
     } catch (error) {
       console.error('Erro ao carregar usuários:', error)
       alert('Erro ao carregar usuários. Veja o console.')
     }
   }
 
-  useEffect(() => {
-    carregarUsuarios()
-  }, [])
+  useEffect(() => { carregarUsuarios() }, [])
 
   const handleDelete = async (id) => {
     if (window.confirm('Tem certeza que deseja excluir este usuário?')) {
@@ -49,37 +40,33 @@ const UsuarioList = () => {
     <CRow>
       <CCol xs={12}>
         <CCard className="mb-4">
-          <CCardHeader>
-            <strong>Lista de Usuários</strong>
-          </CCardHeader>
+          <CCardHeader><strong>Lista de Usuários</strong></CCardHeader>
           <CCardBody>
             <CTable striped hover responsive>
               <CTableHead>
                 <CTableRow>
-                  <CTableHeaderCell scope="col">ID</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Nome</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Email</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Ativo</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Ações</CTableHeaderCell>
+                  <CTableHeaderCell>ID</CTableHeaderCell>
+                  <CTableHeaderCell>Nome</CTableHeaderCell>
+                  <CTableHeaderCell>Email</CTableHeaderCell>
+                  <CTableHeaderCell>Ativo</CTableHeaderCell>
+                  <CTableHeaderCell>Ações</CTableHeaderCell>
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {usuarios.map((usuario) => (
-                  <CTableRow key={usuario.id}>
-                    <CTableDataCell>{usuario.id}</CTableDataCell>
-                    <CTableDataCell>{usuario.nome}</CTableDataCell>
-                    <CTableDataCell>{usuario.email}</CTableDataCell>
-                    <CTableDataCell>{usuario.ativo ? 'Sim' : 'Não'}</CTableDataCell>
+                {usuarios.map((u) => (
+                  <CTableRow key={u.id}>
+                    <CTableDataCell>{u.id}</CTableDataCell>
+                    <CTableDataCell>{u.nome}</CTableDataCell>
+                    <CTableDataCell>{u.email}</CTableDataCell>
+                    <CTableDataCell>{u.ativo ? 'Sim' : 'Não'}</CTableDataCell>
                     <CTableDataCell>
                       <CButton
-                        color="warning"
-                        size="sm"
-                        className="me-2"
-                        onClick={() => (window.location.href = `/editar-usuario/${usuario.id}`)}
+                        color="warning" size="sm" className="me-2"
+                        onClick={() => navigate(`/usuarios/edit/${u.id}`)}
                       >
                         Editar
                       </CButton>
-                      <CButton color="danger" size="sm" onClick={() => handleDelete(usuario.id)}>
+                      <CButton color="danger" size="sm" onClick={() => handleDelete(u.id)}>
                         Excluir
                       </CButton>
                     </CTableDataCell>

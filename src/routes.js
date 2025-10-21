@@ -112,59 +112,72 @@ const routes = [
   // Mesas
   { path: '/mesas', name: 'Mesas', element: MesaList, exact: true },
   { path: '/mesas/new', name: 'Adicionar Mesa', element: MesaAdd },
+  { path: '/mesas/edit/:id', name: 'Editar Mesa', element: MesaAdd },
 
   // Restaurantes
   { path: '/restaurantes', name: 'Restaurantes', element: RestauranteList, exact: true },
   { path: '/restaurantes/new', name: 'Adicionar Restaurante', element: RestauranteAdd },
+  { path: '/restaurantes/edit/:id', name: 'Editar Restaurante', element: RestauranteAdd },
 
   // Unidades
   { path: '/unidades', name: 'Unidades', element: UnidadeList, exact: true },
-  { path: '/unidades/new/:id', name: 'Editar Unidade', element: UnidadeAdd },
   { path: '/unidades/new', name: 'Adicionar Unidade', element: UnidadeAdd },
+  { path: '/unidades/edit/:id', name: 'Editar Unidade', element: UnidadeAdd },
 
   // Usuários
   { path: '/usuarios', name: 'Usuários', element: UsuarioList, exact: true },
   { path: '/usuarios/new', name: 'Adicionar Usuário', element: UsuarioAdd },
+  { path: '/usuarios/edit/:id', name: 'Editar Usuário', element: UsuarioAdd },
 
   // Perfis
   { path: '/perfis', name: 'Perfis', element: PerfilList, exact: true },
   { path: '/perfis/new', name: 'Adicionar Perfil', element: PerfilAdd },
+  { path: '/perfis/edit/:id', name: 'Editar Perfil', element: PerfilAdd },
 
   // Permissões
   { path: '/permissoes', name: 'Permissões', element: PermissaoList, exact: true },
   { path: '/permissoes/new', name: 'Adicionar Permissão', element: PermissaoAdd },
+  { path: '/permissoes/edit/:id', name: 'Editar Permissão', element: PermissaoAdd },
 
   // Clientes
   { path: '/clientes', name: 'Clientes', element: ClienteList, exact: true },
   { path: '/clientes/new', name: 'Adicionar Cliente', element: ClienteAdd },
+  { path: '/clientes/edit/:id', name: 'Editar Cliente', element: ClienteAdd },
 
   // Cardápios
   { path: '/cardapios', name: 'Cardápios', element: CardapioList, exact: true },
   { path: '/cardapios/new', name: 'Adicionar Cardápio', element: CardapioAdd },
+  { path: '/cardapios/edit/:id', name: 'Editar Cardápio', element: CardapioAdd },
 
   // Categorias
   { path: '/categorias', name: 'Categorias', element: CategoriaList, exact: true },
   { path: '/categorias/new', name: 'Adicionar Categoria', element: CategoriaAdd },
+  { path: '/categorias/edit/:id', name: 'Editar Categoria', element: CategoriaAdd },
 
   // Itens do Cardápio
   { path: '/itens-cardapio', name: 'Itens do Cardápio', element: ItemCardapioList, exact: true },
   { path: '/itens-cardapio/new', name: 'Adicionar Item do Cardápio', element: ItemCardapioAdd },
+  { path: '/itens-cardapio/edit/:id', name: 'Editar Item do Cardápio', element: ItemCardapioAdd },
 
   // Ingredientes
   { path: '/ingredientes', name: 'Ingredientes', element: IngredienteList, exact: true },
   { path: '/ingredientes/new', name: 'Adicionar Ingrediente', element: IngredienteAdd },
+  { path: '/ingredientes/edit/:id', name: 'Editar Ingrediente', element: IngredienteAdd },
 
   // Fornecedores
   { path: '/fornecedores', name: 'Fornecedores', element: FornecedorList, exact: true },
   { path: '/fornecedores/new', name: 'Adicionar Fornecedor', element: FornecedorAdd },
+  { path: '/fornecedores/edit/:id', name: 'Editar Fornecedor', element: FornecedorAdd },
 
   // Reservas
   { path: '/reservas', name: 'Reservas', element: ReservaList, exact: true },
   { path: '/reservas/new', name: 'Adicionar Reserva', element: ReservaAdd },
+  { path: '/reservas/edit/:id', name: 'Editar Reserva', element: ReservaAdd },
 
   // Compras
   { path: '/compras', name: 'Compras', element: CompraList, exact: true },
   { path: '/compras/new', name: 'Adicionar Compra', element: CompraAdd },
+  { path: '/compras/edit/:id', name: 'Editar Compra', element: CompraAdd },
 
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
