@@ -3,8 +3,18 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import {
-  CButton, CCard, CCardBody, CCardHeader, CCol, CRow,
-  CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow
+  CButton,
+  CCard,
+  CCardBody,
+  CCardHeader,
+  CCol,
+  CRow,
+  CTable,
+  CTableBody,
+  CTableDataCell,
+  CTableHead,
+  CTableHeaderCell,
+  CTableRow,
 } from '@coreui/react'
 
 const UsuarioList = () => {
@@ -21,7 +31,9 @@ const UsuarioList = () => {
     }
   }
 
-  useEffect(() => { carregarUsuarios() }, [])
+  useEffect(() => {
+    carregarUsuarios()
+  }, [])
 
   const handleDelete = async (id) => {
     if (window.confirm('Tem certeza que deseja excluir este usuário?')) {
@@ -40,7 +52,9 @@ const UsuarioList = () => {
     <CRow>
       <CCol xs={12}>
         <CCard className="mb-4">
-          <CCardHeader><strong>Lista de Usuários</strong></CCardHeader>
+          <CCardHeader>
+            <strong>Lista de Usuários</strong>
+          </CCardHeader>
           <CCardBody>
             <CTable striped hover responsive>
               <CTableHead>
@@ -61,7 +75,9 @@ const UsuarioList = () => {
                     <CTableDataCell>{u.ativo ? 'Sim' : 'Não'}</CTableDataCell>
                     <CTableDataCell>
                       <CButton
-                        color="warning" size="sm" className="me-2"
+                        color="warning"
+                        size="sm"
+                        className="me-2"
                         onClick={() => navigate(`/usuarios/edit/${u.id}`)}
                       >
                         Editar
