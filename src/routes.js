@@ -1,4 +1,5 @@
 import React from 'react'
+import { element } from 'prop-types'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
@@ -54,6 +55,7 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 // --- Mesas (já existentes no seu código de exemplo) ---
 const MesaList = React.lazy(() => import('./views/mesas/MesaList'))
 const MesaAdd = React.lazy(() => import('./views/mesas/MesaAdd'))
+const MesaEdit = React.lazy(() => import('./views/mesas/MesaEdit'))
 
 // --- Restaurantes ---
 const RestauranteList = React.lazy(() => import('./views/restaurantes/RestauranteList'))
@@ -113,7 +115,7 @@ const routes = [
   // Mesas
   { path: '/mesas', name: 'Mesas', element: MesaList, exact: true },
   { path: '/mesas/new', name: 'Adicionar Mesa', element: MesaAdd },
-  { path: '/mesas/edit/:id', name: 'Editar Mesa', element: MesaAdd },
+  { path: '/mesas/edit/:id', name: 'Editar Mesa', element: MesaEdit },
 
   // Restaurantes
   { path: '/restaurantes', name: 'Restaurantes', element: RestauranteList, exact: true },
