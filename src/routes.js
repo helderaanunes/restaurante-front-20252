@@ -128,12 +128,11 @@ const routes = [
   // Usuários
   { path: '/usuarios', name: 'Usuários', element: UsuarioList, exact: true },
   { path: '/usuarios/new', name: 'Adicionar Usuário', element: UsuarioAdd },
-<<<<<<< HEAD
+
   { path: '/usuarios/editar/:id', name: 'Editar Usuário', element: UsuarioEdit },
-=======
+
   { path: '/usuarios/edit/:id', name: 'Editar Usuário', element: UsuarioAdd },
 
->>>>>>> 6a71bbbe8e76f639c031336b1173dfff2459c50e
   // Perfis
   { path: '/perfis', name: 'Perfis', element: PerfilList, exact: true },
   { path: '/perfis/new', name: 'Adicionar Perfil', element: PerfilAdd },
