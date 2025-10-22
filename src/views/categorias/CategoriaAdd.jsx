@@ -28,7 +28,6 @@ const CategoriaForm = () => {
     setMensagem('')
     setErro(false)
 
-
     if (!nome.trim()) {
       setMensagem('O nome da categoria é obrigatório.')
       setErro(true)
@@ -41,7 +40,6 @@ const CategoriaForm = () => {
       setModalVisible(true)
       return
     }
-
     try {
       const response = await axios.post('http://localhost:8080/categoriaItem', {
         nome: nome.trim(),

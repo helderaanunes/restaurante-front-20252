@@ -23,7 +23,7 @@ const PermissaoForm = () => {
     setLoading(true)
     setMessage('')
     try {
-      const response = await axios.post('http://localhost:8080/permissao', {
+      const response = await axios.post('/permissao', {
         codigo,
         descricao,
       })

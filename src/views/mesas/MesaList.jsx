@@ -74,7 +74,7 @@ const MesaList = () => {
   const goToPage = (p) => setPage(Math.min(Math.max(1, p), totalPages))
 
   // --- Ações ---
-  const handleAdd = () => navigate('/mesas/novo')
+  const handleAdd = () => navigate('/mesas/new')
   const handleEdit = (id) => navigate(`/mesas/editar/${id}`)
 
   const handleDelete = async (id) => {
@@ -113,7 +113,7 @@ const MesaList = () => {
                   setQuery(e.target.value)
                   setPage(1)
                 }}
-                style={{ maxWidth: 320 }}
+                style={{ maxWidth: 200 }}
               />
               <CButton color="primary" onClick={handleAdd} className="text-white">
                 <CIcon icon={cilPlus} className="me-2" /> Nova mesa
@@ -141,7 +141,7 @@ const MesaList = () => {
                       <CTableHeaderCell>Número</CTableHeaderCell>
                       <CTableHeaderCell>Capacidade</CTableHeaderCell>
                       <CTableHeaderCell>QR Fixo</CTableHeaderCell>
-                      <CTableHeaderCell style={{ width: 160 }} className="text-end">
+                      <CTableHeaderCell style={{ width: 200 }} className="text-end">
                         Ações
                       </CTableHeaderCell>
                     </CTableRow>
