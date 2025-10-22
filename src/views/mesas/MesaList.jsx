@@ -113,7 +113,7 @@ const MesaList = () => {
                   setQuery(e.target.value)
                   setPage(1)
                 }}
-                style={{ maxWidth: 320 }}
+                style={{ maxWidth: 200 }}
               />
               <CButton color="primary" onClick={handleAdd} className="text-white">
                 <CIcon icon={cilPlus} className="me-2" /> Nova mesa
@@ -141,7 +141,7 @@ const MesaList = () => {
                       <CTableHeaderCell>Número</CTableHeaderCell>
                       <CTableHeaderCell>Capacidade</CTableHeaderCell>
                       <CTableHeaderCell>QR Fixo</CTableHeaderCell>
-                      <CTableHeaderCell style={{ width: 160 }} className="text-end">
+                      <CTableHeaderCell style={{ width: 200 }} className="text-end">
                         Ações
                       </CTableHeaderCell>
                     </CTableRow>
