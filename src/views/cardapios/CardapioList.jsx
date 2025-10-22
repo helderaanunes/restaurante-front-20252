@@ -14,6 +14,7 @@ import {
   CTableHeaderCell,
   CTableDataCell
 } from '@coreui/react';
+import { useNavigate } from 'react-router-dom'
 
 const ListarCardapios = () => {
   const [cardapios, setCardapios] = useState([]);
@@ -32,10 +33,11 @@ const ListarCardapios = () => {
         alert('Erro ao carregar cardápios.');
       });
   }, []);
+  const navigate = useNavigate()
 
   const handleEdit = (id) => {
     // Aqui você pode redirecionar para a página de edição do cardápio
-    window.location.href = `/editar-cardapio/${id}`; // Ajuste conforme sua estrutura de rotas
+    navigate(`/cardapios/edit/${id}`) // Ajuste conforme sua estrutura de rotas
   };
 
   const handleDelete = (id) => {
@@ -52,6 +54,8 @@ const ListarCardapios = () => {
     }
   };
 
+  const handleAdd = () => navigate('/cardapios/new')
+
   return (
     <CRow>
       <CCol xs={12}>
@@ -66,7 +70,7 @@ const ListarCardapios = () => {
               <>
                 <CButton
                   color="primary"
-                  onClick={() => window.location.href = '/cadastrar-cardapio'}
+                  onClick={handleAdd}
                   className="mb-3"
                 >
                   Cadastrar Novo Cardápio
@@ -74,7 +78,7 @@ const ListarCardapios = () => {
                 <CTable striped hover>
                   <CTableHead>
                     <CTableRow>
-                      <CTableHeaderCell>Nome</CTableHeaderCell>
+                      <CTableHeaderCell>Nome</CTableHeaderCell>fthtr
                       <CTableHeaderCell>Início da Vigência</CTableHeaderCell>
                       <CTableHeaderCell>Fim da Vigência</CTableHeaderCell>
                       <CTableHeaderCell>Exibir no Alto Atendimento</CTableHeaderCell>
