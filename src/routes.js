@@ -130,9 +130,6 @@ const routes = [
   // Usuários
   { path: '/usuarios', name: 'Usuários', element: UsuarioList, exact: true },
   { path: '/usuarios/new', name: 'Adicionar Usuário', element: UsuarioAdd },
-
-  { path: '/usuarios/editar/:id', name: 'Editar Usuário', element: UsuarioEdit },
-
   { path: '/usuarios/edit/:id', name: 'Editar Usuário', element: UsuarioAdd },
 
   // Perfis
