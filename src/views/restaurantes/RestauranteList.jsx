@@ -34,6 +34,7 @@ const ListaRestaurantes = () => {
     cnpj: '',
   })
   const [salvando, setSalvando] = useState(false)
+  const [mensagem, setMensagem] = useState(null) // ✅ para feedback positivo
 
   useEffect(() => {
     buscarRestaurantes()
@@ -52,7 +53,24 @@ const ListaRestaurantes = () => {
       })
   }
 
-  // Abre o modal preenchendo os dados do restaurante selecionado
+  // ✅ NOVO: função para excluir restaurante
+  const handleExcluir = (id) => {
+    if (window.confirm('Tem certeza que deseja excluir este restaurante?')) {
+      axios
+        .delete(`http://localhost:8080/restaurante/${id}`)
+        .then(() => {
+          setMensagem('Restaurante excluído com sucesso!')
+          setErro(null)
+          buscarRestaurantes()
+        })
+        .catch((error) => {
+          console.error(error)
+          setErro('Erro ao excluir restaurante.')
+        })
+    }
+  }
+
+  // Abre modal de atualização
   const handleAtualizar = (restaurante) => {
     setRestauranteSelecionado(restaurante)
     setFormData({
@@ -62,18 +80,16 @@ const ListaRestaurantes = () => {
     setModalAberto(true)
   }
 
-  // Atualiza os dados do formulário enquanto o usuário digita
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  // Envia a atualização para o backend
   const handleSalvar = () => {
     if (!restauranteSelecionado) return
 
     setSalvando(true)
     axios
-      .put(`http://localhost:8080/restaurante/${restauranteSelecionado.id}`, {
+      .put(`http://localhost:8080/restaurante`, {
         ...restauranteSelecionado,
         nome: formData.nome,
         cnpj: formData.cnpj,
@@ -81,6 +97,7 @@ const ListaRestaurantes = () => {
       .then(() => {
         setModalAberto(false)
         setSalvando(false)
+        setMensagem('Restaurante atualizado com sucesso!')
         buscarRestaurantes()
       })
       .catch((error) => {
@@ -99,6 +116,7 @@ const ListaRestaurantes = () => {
           </CCardHeader>
           <CCardBody>
             {erro && <CAlert color="danger">{erro}</CAlert>}
+            {mensagem && <CAlert color="success">{mensagem}</CAlert>}
 
             <CTable striped hover responsive>
               <CTableHead>
@@ -119,9 +137,19 @@ const ListaRestaurantes = () => {
                       <CButton
                         color="warning"
                         size="sm"
+                        className="me-2"
                         onClick={() => handleAtualizar(restaurante)}
                       >
                         Atualizar
+                      </CButton>
+
+                      {/* ✅ Botão de exclusão */}
+                      <CButton
+                        color="danger"
+                        size="sm"
+                        onClick={() => handleExcluir(restaurante.id)}
+                      >
+                        Excluir
                       </CButton>
                     </CTableDataCell>
                   </CTableRow>
