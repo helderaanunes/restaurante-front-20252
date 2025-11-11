@@ -41,8 +41,13 @@ const ListaRestaurantes = () => {
   }, [])
 
   const buscarRestaurantes = () => {
+          const token = localStorage.getItem('token') // 🔑 recupera o token salvo
+
     axios
-      .get('http://localhost:8080/restaurante')
+      .get('http://localhost:8080/restaurante',{
+      headers: {
+        Authorization: `Bearer ${ token}`, // 👈 envia o token no cabeçalho
+      }})
       .then((response) => {
         setRestaurantes(response.data)
         setErro(null)

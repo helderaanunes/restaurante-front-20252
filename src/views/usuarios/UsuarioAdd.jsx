@@ -18,6 +18,7 @@ const UsuarioAdd = () => {
     email: '',
     senha: '',
     ativo: false,
+    permissao: { id: 1 },
   })
 
   useEffect(() => {
@@ -58,11 +59,16 @@ const UsuarioAdd = () => {
           email: usuario.email,
           ativo: usuario.ativo,
           ...(usuario.senha ? { senha: usuario.senha } : {}),
+          permissao: { id: 1 },
         }
         await axios.put(`http://localhost:8080/usuario/${id}`, payload)
         alert('Usuário atualizado com sucesso!')
       } else {
-        await axios.post('http://localhost:8080/usuario', usuario)
+      const usuarioComPermissao = {
+        ...usuario,
+        permissao: { id: 1 }, 
+      }
+        await axios.post('http://localhost:8080/usuario', usuarioComPermissao)
         alert('Usuário cadastrado com sucesso!')
       }
       navigate('/usuarios')

@@ -1,88 +1,90 @@
-import React, { useState } from 'react'
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CForm,
-  CFormInput,
-  CFormLabel,
-  CRow,
-} from '@coreui/react'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const PermissaoForm = () => {
-  const [codigo, setCodigo] = useState('')
-  const [descricao, setDescricao] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
+const PermissaoAdd = () => {
+  const [permissao, setPermissao] = useState({
+    nome: '',
+    descricao: ''
+  });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    setMessage('')
-    try {
-      const response = await axios.post('/permissao', {
-        codigo,
-        descricao,
-      })
-      setMessage(`Permissão cadastrada com sucesso! ID: ${response.data.id}`)
-      setCodigo('')
-      setDescricao('')
-    } catch (error) {
-      setMessage('Erro ao cadastrar permissão. Tente novamente.')
-      console.error(error)
-    } finally {
-      setLoading(false)
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  // Se tiver ID, carrega a permissão existente (edição)
+  useEffect(() => {
+    if (id) {
+      axios.get(`http://localhost:8080/permissao/${id}`)
+        .then((response) => {
+          setPermissao(response.data);
+        })
+        .catch((error) => {
+          console.error('Erro ao buscar permissão:', error);
+          alert('Erro ao carregar os dados da permissão!');
+        });
     }
-  }
+  }, [id]);
+
+  // Atualiza os campos do formulário
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPermissao({ ...permissao, [name]: value });
+  };
+
+  // Envia os dados ao backend
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      if (id) {
+        await axios.put(`http://localhost:8080/permissao`, permissao);
+        alert('Permissão atualizada com sucesso!');
+      } else {
+        await axios.post('http://localhost:8080/permissao', permissao);
+        alert('Permissão cadastrada com sucesso!');
+      }
+
+      navigate('/permissoes'); // redireciona para listagem após salvar
+    } catch (error) {
+      console.error('Erro ao salvar permissão:', error);
+      alert('Erro ao salvar a permissão.');
+    }
+  };
 
   return (
-    <CRow className="justify-content-center">
-      <CCol xs={12} md={6}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>Cadastro de Permissão</strong>
-          </CCardHeader>
-          <CCardBody>
-            <CForm onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <CFormLabel htmlFor="codigo">Código</CFormLabel>
-                <CFormInput
-                  type="text"
-                  id="codigo"
-                  placeholder="Digite o código da permissão"
-                  value={codigo}
-                  onChange={(e) => setCodigo(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <CFormLabel htmlFor="descricao">Descrição</CFormLabel>
-                <CFormInput
-                  type="text"
-                  id="descricao"
-                  placeholder="Digite a descrição da permissão"
-                  value={descricao}
-                  onChange={(e) => setDescricao(e.target.value)}
-                  required
-                />
-              </div>
-              <CButton type="submit" color="primary" disabled={loading}>
-                {loading ? 'Salvando...' : 'Salvar'}
-              </CButton>
-            </CForm>
-            {message && (
-              <div className="mt-3">
-                <small>{message}</small>
-              </div>
-            )}
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
-  )
-}
+    <div className="container mt-4">
+      <h2>{id ? 'Editar Permissão' : 'Cadastrar Permissão'}</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group mt-3">
+          <label>Nome</label>
+          <input
+            type="text"
+            name="nome"
+            className="form-control"
+            value={permissao.nome}
+            onChange={handleChange}
+            placeholder="Digite o nome da permissão"
+            required
+          />
+        </div>
 
-export default PermissaoForm
+        <div className="form-group mt-3">
+          <label>Descrição</label>
+          <textarea
+            name="descricao"
+            className="form-control"
+            value={permissao.descricao}
+            onChange={handleChange}
+            placeholder="Digite a descrição da permissão"
+          />
+        </div>
+
+        <button type="submit" className="btn btn-primary mt-3">
+          {id ? 'Atualizar' : 'Salvar'}
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default PermissaoAdd;

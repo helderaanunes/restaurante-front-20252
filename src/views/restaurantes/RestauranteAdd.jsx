@@ -78,11 +78,18 @@ const CadastroRestaurante = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8080/restaurante', {
-        nome,
-        cnpj,
-      })
+      const token = localStorage.getItem('token') // 🔑 recupera o token salvo
 
+  const response = await axios.post(
+    'http://localhost:8080/restaurante',
+    { nome, cnpj },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`, // 👈 envia o token no cabeçalho
+      },
+    }
+  );
+      console.log(response)
       setMensagem('Restaurante cadastrado com sucesso! ✅')
       setErro(null)
       setNome('')

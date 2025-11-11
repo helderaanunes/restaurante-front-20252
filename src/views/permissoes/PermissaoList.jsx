@@ -1,76 +1,95 @@
-import React, { useEffect, useState } from 'react'
-import {
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CRow,
-  CTable,
-  CTableBody,
-  CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
-  CTableRow,
-  CSpinner,
-  CAlert,
-} from '@coreui/react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 const PermissaoList = () => {
-  const [permissoes, setPermissoes] = useState([])
-  const [carregando, setCarregando] = useState(true)
-  const [erro, setErro] = useState('')
+  const [permissoes, setPermissoes] = useState([]);
+  const navigate = useNavigate();
 
+  // Busca todas as permissões ao carregar a página
   useEffect(() => {
-    const fetchData = async () => {
+    carregarPermissoes();
+  }, []);
+
+  const carregarPermissoes = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/permissao');
+      setPermissoes(response.data);
+    } catch (error) {
+      console.error('Erro ao buscar permissões:', error);
+      alert('Erro ao carregar a lista de permissões.');
+    }
+  };
+
+  const excluirPermissao = async (id) => {
+    if (window.confirm('Deseja realmente excluir esta permissão?')) {
       try {
-        const resp = await axios.get('http://localhost:8080/permissao')
-        setPermissoes(resp.data)
-      } catch (err) {
-        setErro('Erro ao carregar permissões.')
-      } finally {
-        setCarregando(false)
+        await axios.delete(`http://localhost:8080/permissao/${id}`);
+        alert('Permissão excluída com sucesso!');
+        carregarPermissoes(); // atualiza a lista após excluir
+      } catch (error) {
+        console.error('Erro ao excluir permissão:', error);
+        alert('Erro ao excluir a permissão.');
       }
     }
-    fetchData()
-  }, [])
+  };
 
   return (
-    <CRow>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>Lista de Permissões</strong>
-          </CCardHeader>
-          <CCardBody>
-            {erro && <CAlert color="danger">{erro}</CAlert>}
-            {carregando ? (
-              <CSpinner />
-            ) : (
-              <CTable striped hover responsive>
-                <CTableHead>
-                  <CTableRow>
-                    <CTableHeaderCell scope="col">ID</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Código</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Descrição</CTableHeaderCell>
-                  </CTableRow>
-                </CTableHead>
-                <CTableBody>
-                  {permissoes.map((p) => (
-                    <CTableRow key={p.id}>
-                      <CTableDataCell>{p.id}</CTableDataCell>
-                      <CTableDataCell>{p.codigo}</CTableDataCell>
-                      <CTableDataCell>{p.descricao}</CTableDataCell>
-                    </CTableRow>
-                  ))}
-                </CTableBody>
-              </CTable>
-            )}
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
-  )
-}
+    <div className="container mt-4">
+      <h2>Lista de Permissões</h2>
 
-export default PermissaoList
+      <div className="d-flex justify-content-end mb-3">
+        <button
+          className="btn btn-success"
+          onClick={() => navigate('/permissao/add')}
+        >
+          Nova Permissão
+        </button>
+      </div>
+
+      <table className="table table-bordered table-striped">
+        <thead className="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {permissoes.length > 0 ? (
+            permissoes.map((p) => (
+              <tr key={p.id}>
+                <td>{p.id}</td>
+                <td>{p.nome}</td>
+                <td>{p.descricao}</td>
+                <td>
+                  <Link
+                    to={`/permissao/edit/${p.id}`}
+                    className="btn btn-primary btn-sm me-2"
+                  >
+                    Editar
+                  </Link>
+                  <button
+                    onClick={() => excluirPermissao(p.id)}
+                    className="btn btn-danger btn-sm"
+                  >
+                    Excluir
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="4" className="text-center">
+                Nenhuma permissão cadastrada.
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default PermissaoList;
