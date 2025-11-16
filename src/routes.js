@@ -6,7 +6,8 @@ const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 
 // Pedido
-const PainelPedidos = React.lazy(() => import("./views/Painel-Pedidos/PainelPedidos"));
+const PainelPedidos = React.lazy(() => import("./views/Pedido/PainelPedidos"));
+
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
