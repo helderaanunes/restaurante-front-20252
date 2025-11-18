@@ -7,11 +7,14 @@ export default function PainelPedidos() {
 
   useEffect(() => {
     async function carregarPedidos() {
-      const res = await fetch("http://localhost:8080/pedidos/status");
-      const data = await res.json();
+      const preparandoRes = await fetch("http://localhost:8080/pedidos/preparando");
+      const prontosRes = await fetch("http://localhost:8080/pedidos/prontos");
 
-      setPreparando(data.preparando);
-      setProntos(data.prontos);
+      const preparandoData = await preparandoRes.json();
+      const prontosData = await prontosRes.json();
+
+      setPreparando(preparandoData.map(p => p.id));
+      setProntos(prontosData.map(p => p.id));
     }
 
     carregarPedidos();
@@ -25,14 +28,16 @@ export default function PainelPedidos() {
       <div className="coluna">
         <h1>PREPARANDO</h1>
         <ul>
-          {preparando.map((num) => (
-            <li key={num}>{num}</li>
+         {preparando.map((num) => (
+            <li key={num} className="pronto">
+              {num}
+            </li>
           ))}
         </ul>
       </div>
 
       <div className="coluna">
-        <h1>PRONTO</h1>
+        <h1>PRONTOS</h1>
         <ul>
           {prontos.map((num) => (
             <li key={num} className="pronto">
