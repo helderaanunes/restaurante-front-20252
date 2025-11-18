@@ -1,5 +1,3 @@
-// src/views/ItemCardapio/CadastroItemCardapio.jsx
-
 import React, { useState } from 'react'
 import {
   CButton,
@@ -34,10 +32,10 @@ const CadastroItemCardapio = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
-    setForm({
-      ...form,
+    setForm((prev) => ({
+      ...prev,
       [name]: type === 'checkbox' ? checked : value,
-    })
+    }))
   }
 
   const handleSubmit = async (e) => {
@@ -53,25 +51,48 @@ const CadastroItemCardapio = () => {
     try {
       const token = localStorage.getItem('token')
 
-      await axios.post(
-        'http://localhost:8080/item-cardapio',
-        {
-          ...form,
-          preco: parseFloat(form.preco),
-          tempoPreparoEstimado: parseInt(form.tempoPreparoEstimado || 0),
-          limitePorPedido: parseInt(form.limitePorPedido || 0),
+      if (!token) {
+        // opcional: tratar token ausente
+        setErro('Token não encontrado. Faça login novamente.')
+        setMensagem(null)
+        return
+      }
+
+      // preparar payload convertendo valores numéricos com fallback seguro
+      const precoFloat = (() => {
+        if (typeof form.preco === 'number') return form.preco
+        const s = (form.preco || '').toString().trim()
+        if (s === '') return 0
+        return parseFloat(s.replace(',', '.')) || 0
+      })()
+
+      const tempo = Number.isFinite(Number(form.tempoPreparoEstimado))
+        ? parseInt(form.tempoPreparoEstimado, 10)
+        : 0
+
+      const limite = Number.isFinite(Number(form.limitePorPedido))
+        ? parseInt(form.limitePorPedido, 10)
+        : 0
+
+      const payload = {
+        ...form,
+        preco: precoFloat,
+        tempoPreparoEstimado: tempo,
+        limitePorPedido: limite,
+      }
+
+      await axios.post('http://localhost:8080/itemCardapio', payload, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
+        timeout: 10000, // opcional: timeout de 10s
+      })
 
       setMensagem('Item do cardápio cadastrado com sucesso! ✅')
       setErro(null)
 
-      // Limpar campos
+      // Resetar form
       setForm({
         nome: '',
         descricao: '',
@@ -83,8 +104,26 @@ const CadastroItemCardapio = () => {
         limitePorPedido: '',
       })
     } catch (error) {
-      console.error(error)
-      setErro('Erro ao cadastrar item. Veja o console.')
+      // tratamento robusto de erro Axios
+      console.error('Erro no cadastro:', error)
+
+      if (error.response) {
+        // servidor respondeu com status != 2xx
+        const serverMessage =
+          error.response.data?.message ||
+          error.response.data ||
+          `Erro do servidor (status ${error.response.status})`
+        setErro(serverMessage)
+      } else if (error.request) {
+        // requisição feita mas sem resposta (ex: backend não rodando)
+        setErro(
+          'Sem resposta do servidor. Verifique se o backend está rodando em http://localhost:8080 e a porta está correta.'
+        )
+      } else {
+        // outro erro (config, criação do request, etc)
+        setErro(error.message || 'Erro ao cadastrar item.')
+      }
+
       setMensagem(null)
     }
   }
@@ -145,17 +184,16 @@ const CadastroItemCardapio = () => {
               <div className="mb-3">
                 <CFormLabel htmlFor="preco">Preço</CFormLabel>
                 <CFormInput
-                  type="number"
+                  type="text"
                   id="preco"
                   name="preco"
-                  step="0.01"
                   placeholder="Ex: 29.90"
                   value={form.preco}
                   onChange={handleChange}
                 />
               </div>
 
-              {/* Disponível / Autoatendimento */}
+              {/* Disponível */}
               <div className="mb-3">
                 <CFormCheck
                   id="disponivel"
@@ -166,6 +204,7 @@ const CadastroItemCardapio = () => {
                 />
               </div>
 
+              {/* Autoatendimento */}
               <div className="mb-3">
                 <CFormCheck
                   id="exibirNoAutoatendimento"
@@ -176,7 +215,7 @@ const CadastroItemCardapio = () => {
                 />
               </div>
 
-              {/* Tempo de preparo */}
+              {/* Tempo */}
               <div className="mb-3">
                 <CFormLabel htmlFor="tempoPreparoEstimado">
                   Tempo de preparo estimado (minutos)
@@ -191,7 +230,7 @@ const CadastroItemCardapio = () => {
                 />
               </div>
 
-              {/* Limite por pedido */}
+              {/* Limite */}
               <div className="mb-3">
                 <CFormLabel htmlFor="limitePorPedido">Limite por pedido</CFormLabel>
                 <CFormInput

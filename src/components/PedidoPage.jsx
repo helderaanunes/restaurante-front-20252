@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
 import CategoriaTabs from "../components/Categoriatabs";
-import ProdutoGrid from "../components/ProdutoGrid";
+import ItemCardapioGrid from "../components/ItemCardapioGrid";
 import PedidoResumo from "../components/PedidoResumo";
+
 import { getCategorias, getProdutosByCategoria } from "../services/produtoService";
 import { usePedidoStore } from "../store/pedidoStore";
 
 export default function PedidoPage() {
 
   const categorias = getCategorias();
+
   const [categoriaAtiva, setCategoriaAtiva] = useState(categorias[0]);
-  const [produtos, setProdutos] = useState([]);
-  
+  const [itensCardapio, setItensCardapio] = useState([]);
+
   const itens = usePedidoStore(s => s.itens);
   const adicionar = usePedidoStore(s => s.adicionar);
   const limpar = usePedidoStore(s => s.limpar);
 
+  // Carregar itens do cardápio conforme a categoria ativa
   useEffect(() => {
-    getProdutosByCategoria(categoriaAtiva).then(setProdutos);
+    getProdutosByCategoria(categoriaAtiva).then(setItensCardapio);
   }, [categoriaAtiva]);
 
   function enviarPedido() {
@@ -34,11 +37,14 @@ export default function PedidoPage() {
         onChange={setCategoriaAtiva}
       />
 
-      <ProdutoGrid produtos={produtos} onAdd={adicionar} />
+      {/* Exibe itens do cardápio filtrados por categoria */}
+      <ItemCardapioGrid itemCardapio={itensCardapio} onAdd={adicionar} />
 
+      {/* Resumo do pedido */}
       {itens.length > 0 && (
-        <PedidoResumo itens={itens} onEnviar={enviarPedido}/>
+        <PedidoResumo itens={itens} onEnviar={enviarPedido} />
       )}
     </div>
   );
 }
+
