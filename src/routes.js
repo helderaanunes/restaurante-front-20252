@@ -61,6 +61,10 @@ const MesaList = React.lazy(() => import('./views/mesas/MesaList'))
 const MesaAdd = React.lazy(() => import('./views/mesas/MesaAdd'))
 const MesaEdit = React.lazy(() => import('./views/mesas/MesaEdit'))
 
+// --- Pedido ---
+const pedidoAdd = React.lazy(() =>import('./views/Pedido/pedidoAdd'))
+
+
 // --- Restaurantes ---
 const RestauranteList = React.lazy(() => import('./views/restaurantes/RestauranteList'))
 const RestauranteAdd = React.lazy(() => import('./views/restaurantes/RestauranteAdd'))
@@ -122,6 +126,12 @@ const routes = [
   { path: '/mesas', name: 'Mesas', element: MesaList, exact: true },
   { path: '/mesas/new', name: 'Adicionar Mesa', element: MesaAdd },
   { path: '/mesas/edit/:id', name: 'Editar Mesa', element: MesaEdit },
+  
+  // Cozinha
+  { path: '/cozinha', name: 'Pedidos Cozinha', element: React.lazy(() => import('./views/cozinha/PedidoCozinha')) },
+
+  // Pedido
+  { path: '/pedido/new', name: 'Adicionar Pedido', element: pedidoAdd },
 
   {path:'/pedido/pedidoGarcom', name:'Pedido por Garçom', element:PedidoGarcom },
 

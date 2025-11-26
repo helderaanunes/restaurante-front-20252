@@ -27,6 +27,7 @@ import {
   cilTruck,
   cilCalendar,
   cilCart,
+  cilApple,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -92,6 +93,34 @@ const _nav = [
         component: CNavItem,
         name: 'Adicionar',
         to: '/mesas/new',
+        icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Cozinhas',
+    to: '/cozinha',
+    icon: <CIcon icon={cilApple} customClassName="nav-icon" />, // use o ícone que preferir
+    items: [
+      {
+        component: CNavItem,
+        name: 'Tabela de Pedidos',
+        to: '/cozinha',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Pedidos',
+    to: '/Pedido',
+    icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Painel de Pedidos',
+        to: '/Pedido/new',
         icon: <CIcon icon={cilPlus} customClassName="nav-icon" />,
       },
     ],
