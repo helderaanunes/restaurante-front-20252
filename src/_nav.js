@@ -63,6 +63,21 @@ const _nav = [
   },
   {
     component: CNavGroup,
+    name: 'Pedidos',
+    to: '/pedido',
+    icon: <CIcon icon={cilPizza} customClassName="nav-icon" />, // use o ícone que preferir
+    items: [
+      {
+        component: CNavItem,
+        name: 'Pedido por garçom',
+        to: '/pedido/pedidoGarcom',
+        icon: <CIcon icon={cilList} customClassName="nav-icon" />,
+      }
+      
+    ],
+  },
+  {
+    component: CNavGroup,
     name: 'Mesas',
     to: '/mesas',
     icon: <CIcon icon={cilPizza} customClassName="nav-icon" />, // use o ícone que preferir

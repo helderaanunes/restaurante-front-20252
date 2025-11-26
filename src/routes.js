@@ -114,12 +114,16 @@ const ReservaAdd = React.lazy(() => import('./views/reservas/ReservaAdd'))
 const CompraList = React.lazy(() => import('./views/compras/CompraList'))
 const CompraAdd = React.lazy(() => import('./views/compras/CompraAdd'))
 
+
+const PedidoGarcom = React.lazy(() => import('./views/Pedido/PedidoGarcom'))
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   // Mesas
   { path: '/mesas', name: 'Mesas', element: MesaList, exact: true },
   { path: '/mesas/new', name: 'Adicionar Mesa', element: MesaAdd },
   { path: '/mesas/edit/:id', name: 'Editar Mesa', element: MesaEdit },
+
+  {path:'/pedido/pedidoGarcom', name:'Pedido por Garçom', element:PedidoGarcom },
 
   // Restaurantes
   { path: '/restaurantes', name: 'Restaurantes', element: RestauranteList, exact: true },
